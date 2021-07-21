@@ -1,5 +1,5 @@
 /*
- * Author: Martin Krulis <krulis@ksi.mff.cuni.cz>
+ * Author: Martin Krulis <krulis@d3s.mff.cuni.cz>
  * Last Modification: 2.7.2014
  * License: CC 3.0 BY-NC (http://creativecommons.org/)
  * This file is now obsolete if you are using C++11 or newer. Use native C++ random generators instead.

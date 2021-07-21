@@ -1,5 +1,5 @@
 /*
- * Author: Martin Krulis <krulis@ksi.mff.cuni.cz>
+ * Author: Martin Krulis <krulis@d3s.mff.cuni.cz>
  * Last Modification: 11.7.2013
  * License: CC 3.0 BY-NC (http://creativecommons.org/)
  */
