@@ -89,7 +89,7 @@ public:
 	 *		The buffer may be used with any device, but only selected device may benefit from
 	 *		memory transfer overlapping.
 	 */
-	HostBuffer<T>(std::size_t count = 0, bool mapped = false, bool pinned = false, bool writeCombined = false, int deviceId = -1)
+	HostBuffer(std::size_t count = 0, bool mapped = false, bool pinned = false, bool writeCombined = false, int deviceId = -1)
 		: mData(nullptr), mCount(0), mDevice(-1), mFlags(0)
 	{
 		realloc(count, mapped, pinned, writeCombined, deviceId);
@@ -97,7 +97,7 @@ public:
 
 
 	// Destructor releases the internal memory.
-	virtual ~HostBuffer<T>()
+	virtual ~HostBuffer()
 	{
 		try {
 			free();
@@ -107,7 +107,7 @@ public:
 
 
 	// Move constructor.
-	HostBuffer<T>(HostBuffer<T> &&buf)
+	HostBuffer(HostBuffer<T> &&buf)
 	{
 		mData = buf.mData;
 		mCount = buf.mCount;
@@ -117,7 +117,7 @@ public:
 
 
 	// Copy constructor is disabled, since we do not have reference counting.
-	HostBuffer<T>(const HostBuffer<T> &buf) = delete;
+	HostBuffer(const HostBuffer<T> &buf) = delete;
 
 
 	/**
@@ -224,8 +224,8 @@ public:
 
 		// Allocate the memory.
 		mFlags = (mapped ? cudaHostAllocMapped : 0)
-			|| (pinned ? cudaHostAllocPortable : 0)
-			|| (writeCombined ? cudaHostAllocWriteCombined : 0);
+			| (pinned ? cudaHostAllocPortable : 0)
+			| (writeCombined ? cudaHostAllocWriteCombined : 0);
 		CUCH(cudaHostAlloc(&mData, count * sizeof(T), mFlags));
 		mCount = count;
 		mDevice = deviceId;
@@ -281,7 +281,7 @@ private:
 	}
 
 public:
-	CudaBuffer<T>(std::size_t count = 0)
+	CudaBuffer(std::size_t count = 0)
 		: mData(nullptr), mCount(0)
 	{
 		realloc(count);

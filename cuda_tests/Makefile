@@ -1,7 +1,7 @@
-CPP=icpc
-CFLAGS=-Wall -O2 -std=c++11 -msse4.2
-CUDA_FLAGS=-O3
-CUDA_ARCH=-arch sm_35
+CPP=g++
+CFLAGS=-Wall -O2 -std=c++20
+CUDA_FLAGS=-O3 -std=c++20
+CUDA_ARCH=-arch sm_70
 INCLUDE=../include /usr/local/cuda/include
 LDFLAGS=
 LIBS=rt cudart
