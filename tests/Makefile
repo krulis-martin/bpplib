@@ -1,5 +1,5 @@
-CPP=g++17
-CFLAGS=-Wall -O3 -std=c++17 -m64 -msse4.2 -fopenmp
+CPP=g++
+CFLAGS=-Wall -O3 -std=c++23 -fopenmp
 INCLUDE=../include #/opt/intel/tbb/include
 LDFLAGS=-fopenmp
 LIBS=rt pthread
