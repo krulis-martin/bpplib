@@ -1,8 +1,8 @@
 #include "../test.hpp"
 #include <cli/args.hpp>
 #include <misc/exception.hpp>
-#include <misc/ptr_fix.hpp>
 
+#include <memory>
 #include <iostream>
 
 
@@ -139,7 +139,7 @@ public:
 
 		try {
 			bpp::ProgramArguments args(1);
-			args.registerArg_deprecated(bpp::make_unique<bpp::ProgramArguments::ArgInt>("int1", "", true, 0, 0, 1000));
+			args.registerArg_deprecated(std::make_unique<bpp::ProgramArguments::ArgInt>("int1", "", true, 0, 0, 1000));
 			processArgs(args, {	"BPPLib/test.exe", "-int1", "42" });	// Exception expected
 			return false;
 		}

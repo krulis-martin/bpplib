@@ -7,8 +7,6 @@
 #ifndef BPPLIB_CLI_LOGGER_HPP
 #define BPPLIB_CLI_LOGGER_HPP
 
-#include <misc/ptr_fix.hpp>
-
 #include <vector>
 #include <map>
 #include <string>
@@ -260,7 +258,7 @@ Logger& log(std::unique_ptr<Logger> && logger = std::unique_ptr<Logger>())
 
 	if (!residentLogger) {
 		// No logger, construct default
-		residentLogger = bpp::make_unique<Logger>();
+		residentLogger = std::make_unique<Logger>();
 	}
 
 	return (*residentLogger.get()).setSeverity(LogSeverity::UNDEFINED);

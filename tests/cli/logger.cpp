@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <memory>
 
 class BPPCLILoggerTest : public BPPLibTest
 {
@@ -29,7 +30,7 @@ public:
 		try {
 			std::stringstream rec, ref;
 
-			bpp::log(bpp::make_unique<bpp::Logger>(rec));
+			bpp::log(std::make_unique<bpp::Logger>(rec));
 			bpp::log() << "Some data: " << 42 << 54.0 << std::string("\n");
 			ref << "Some data: " << 42 << 54.0 << std::string("\n");
 			check(ref, rec);

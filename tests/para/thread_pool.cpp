@@ -1,10 +1,10 @@
 #include "../test.hpp"
 #include <para/thread_pool.hpp>
 #include <math/random.hpp>
-#include <misc/ptr_fix.hpp>
 
 #include <vector>
 #include <iostream>
+#include <memory>
 
 
 /**
@@ -53,7 +53,7 @@ public:
 		bpp::ThreadPool threadPool(4, 8);
 		std::vector< std::shared_ptr<TestTask> > tasks(10);
 		for (std::size_t i = 0; i < tasks.size(); ++i) {
-			tasks[i] = bpp::make_shared<TestTask>(data, i*1000, 1000);
+			tasks[i] = std::make_shared<TestTask>(data, i*1000, 1000);
 			threadPool.addTask(tasks[i]);
 		}
 
@@ -116,7 +116,7 @@ public:
 			bpp::ThreadPool threadPool(4, 8);
 			std::vector< std::shared_ptr<TestTask> > tasks(5);
 			for (std::size_t i = 0; i < tasks.size(); ++i) {
-				tasks[i] = bpp::make_shared<TestTask>(i);
+				tasks[i] = std::make_shared<TestTask>(i);
 				threadPool.addTask(tasks[i]);
 			}
 

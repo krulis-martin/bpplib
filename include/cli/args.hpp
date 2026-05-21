@@ -7,9 +7,7 @@
 #ifndef BPPLIB_CLI_ARGS_HPP
 #define BPPLIB_CLI_ARGS_HPP
 
-#include <system/filesystem.hpp>
 #include <misc/exception.hpp>
-#include <misc/ptr_fix.hpp>
 
 #include <set>
 #include <map>
@@ -771,7 +769,7 @@ public:
 
 
 private:
-	std::string mProgramName;	///< Name of the program taken as first record on command line.
+	std::string mProgramPath;	///< Path of the program taken as first record on command line.
 
 	/**
 	 * \brief Map of named arguments. The arguments are indexed by their names (no duplicates allowed).
@@ -857,9 +855,18 @@ public:
 	/**
 	 * \brief Return name of the program as it was passed to command line.
 	 */
+	const std::string& getProgramPath() const
+	{
+		return mProgramPath;
+	}
+
+	/**
+	 * \brief Return base name of the program (without path).
+	 */
 	const std::string& getProgramName() const
 	{
-		return mProgramName;
+		std::size_t pos = mProgramPath.find_last_of("/\\");
+		return (pos == std::string::npos) ? mProgramPath : mProgramPath.substr(pos + 1);
 	}
 
 
@@ -995,7 +1002,7 @@ public:
 	void process(int argc, const char *argv[])
 	{
 		// Get program name.
-		mProgramName.assign(argv[0]);
+		mProgramPath.assign(argv[0]);
 		--argc; ++argv;	// skip program name
 
 		// Process named arguments.
@@ -1068,7 +1075,7 @@ public:
 	 */
 	void printUsage(std::ostream &stream) const
 	{
-		stream << "Usage: " << Path::getFileName(getProgramName()) << std::endl;
+		stream << "Usage: " << getProgramName() << std::endl;
 
 		stream << "Named arguments:" << std::endl;
 		for (auto it = mArguments.begin(); it != mArguments.end(); ++it) {
